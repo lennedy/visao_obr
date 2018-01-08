@@ -1,0 +1,26 @@
+<launch>
+	<arg name="nome_grupo" default="PDI" />
+	<arg name="caminho_arquivo_fonte" default="/home/lennedy/software/catkin_ws/src/image_stream_opencv/imagens/bola1.jpg" />
+	<arg name="image_in_topic" default="/camera/image_raw" />
+	<arg name="image_out_topic" default="image_out_topic" />
+	<arg name="position_out_topic" default="position_out_topic" />	
+	<arg name="visualize" default="false"/>
+
+  <include file="$(find image_stream_opencv)/launch/image_stream.launch" >
+		<arg name="nome_grupo" value="camera"/>
+		<arg name="caminho_arquivo_fonte" value="$(arg caminho_arquivo_fonte)"/>
+	</include>
+
+	<group ns= "$(arg nome_grupo)">	
+		<node pkg="visao_obr" name="find_circle" type="search_circles">
+			<param name="image_in_topic" type="string" value="$(arg image_in_topic)"/>
+			<param name="image_out_topic" type="string" value="$(arg image_out_topic)"/>
+			<param name="position_out_topic" type="string" value="$(arg position_out_topic)"/>
+		</node>
+    <node if="$(arg visualize)" name="$(arg nome_grupo)_circle_view" pkg="image_view" type="image_view">
+    	<remap from="image" to="image_out_topic" />
+    </node>
+	</group>
+
+
+</launch>
