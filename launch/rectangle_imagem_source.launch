@@ -1,8 +1,13 @@
 <launch>
 	<arg name="nome_grupo" default="PDI" />
 	<arg name="caminho_arquivo_fonte" default="/home/lennedy/software/catkin_ws/src/image_stream_opencv/imagens/bola1.jpg" />
+	<arg name="image_in_topic" default="/camera/image_raw" />
+	<arg name="image_out_topic" default="image_out_topic" />
+	<arg name="position_out_topic" default="position_out_topic" />	
+	<arg name="visualize" default="false"/>
+	<arg name="input_enable" default="true"/>
 	
-  <include file="$(find image_stream_opencv)/launch/image_stream.launch" >
+  <include if="$(arg input_enable)" file="$(find image_stream_opencv)/launch/image_stream.launch" >
 		<arg name="nome_grupo" value="camera"/>
 		<arg name="caminho_arquivo_fonte" value="$(arg caminho_arquivo_fonte)"/>
 	</include>
@@ -11,7 +16,7 @@
 		<node pkg="visao_obr" name="find_rectangle" type="search_rectangle">
 		<remap from="image_out" to="rectangle_image" />
 		</node>
-    <node name="$(arg nome_grupo)_rectangle_view" pkg="image_view" type="image_view">
+    <node if="$(arg visualize)" name="$(arg nome_grupo)_rectangle_view" pkg="image_view" type="image_view">
     	<remap from="image" to="rectangle_image" />
     </node>
 	</group>

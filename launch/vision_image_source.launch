@@ -1,0 +1,12 @@
+<launch>
+
+	<include file="$(find visao_obr)/launch/circle_imagem_source.launch" >
+			<arg name="input_enable" value="true" />
+	</include>
+
+	<include file="$(find visao_obr)/launch/rectangle_imagem_source.launch" >
+			<arg name="input_enable" value="false" />
+	</include>
+
+	
+</launch>

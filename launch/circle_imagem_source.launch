@@ -5,8 +5,9 @@
 	<arg name="image_out_topic" default="image_out_topic" />
 	<arg name="position_out_topic" default="position_out_topic" />	
 	<arg name="visualize" default="false"/>
+	<arg name="input_enable" default="true"/>
 
-  <include file="$(find image_stream_opencv)/launch/image_stream.launch" >
+  <include  if="$(arg input_enable)" file="$(find image_stream_opencv)/launch/image_stream.launch" >
 		<arg name="nome_grupo" value="camera"/>
 		<arg name="caminho_arquivo_fonte" value="$(arg caminho_arquivo_fonte)"/>
 	</include>
