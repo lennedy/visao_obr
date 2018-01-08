@@ -14,10 +14,12 @@
 
 	<group ns= "$(arg nome_grupo)">	
 		<node pkg="visao_obr" name="find_rectangle" type="search_rectangle">
-		<remap from="image_out" to="rectangle_image" />
+			<param name="image_in_topic" type="string" value="$(arg image_in_topic)"/>
+			<param name="image_out_topic" type="string" value="$(arg image_out_topic)"/>
+			<param name="position_out_topic" type="string" value="$(arg position_out_topic)"/>
 		</node>
     <node if="$(arg visualize)" name="$(arg nome_grupo)_rectangle_view" pkg="image_view" type="image_view">
-    	<remap from="image" to="rectangle_image" />
+    	<remap from="image" to="$(arg image_out_topic)" />
     </node>
 	</group>
 

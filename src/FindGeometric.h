@@ -18,6 +18,9 @@ class FindGeometric{
 
 	//criacao do "no" ROS
 	ros::NodeHandle nh;
+
+	ros::NodeHandle _nh; // to get the private params
+
 	image_transport::ImageTransport it;
 
 protected:

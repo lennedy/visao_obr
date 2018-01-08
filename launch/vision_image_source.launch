@@ -2,10 +2,18 @@
 
 	<include file="$(find visao_obr)/launch/circle_imagem_source.launch" >
 			<arg name="input_enable" value="true" />
+			<arg name="visualize" value="false" />
+			<arg name="image_out_topic" value="image_circ_topic" />
+			<arg name="position_out_topic" value="position_circ_topic" />
+
 	</include>
 
 	<include file="$(find visao_obr)/launch/rectangle_imagem_source.launch" >
 			<arg name="input_enable" value="false" />
+			<arg name="visualize" value="false" />
+			<arg name="image_out_topic" value="image_rect_topic" />
+			<arg name="position_out_topic" value="position_rect_topic" />
+
 	</include>
 
 	

@@ -3,11 +3,24 @@
 using namespace cv;
 using namespace sensor_msgs;
 
-FindGeometric::FindGeometric():it(nh){
+FindGeometric::FindGeometric():it(nh),_nh("~"){
 
 	pubImageName 				= "treated_image";
 	subImageName 				= "/camera/image_raw";
 	pubGeometricPosName	= "circles";
+
+  std::string image_out_topic;
+  _nh.param("image_out_topic", image_out_topic, std::string("image_out_topic"));
+	setPubImageName(image_out_topic);
+
+  std::string position_out_topic;
+  _nh.param("position_out_topic", position_out_topic, std::string("position_out_topic"));
+	setPubGeometricPosName(position_out_topic);
+
+  std::string image_in_topic;
+  _nh.param("image_in_topic", image_in_topic, std::string("image_in_topic"));
+	setSubImageName(image_in_topic);
+
 
 }
 
