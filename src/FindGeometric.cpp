@@ -64,7 +64,7 @@ void FindGeometric::imageCallBack(const sensor_msgs::ImageConstPtr& msg){
 		ROS_ERROR("Could not convert ros to openCV. '%s'.", e.what());
 	}
 	//publica o valor de posicao de cada figura geometrica
-//	pubGeometricPos.publish(getPosFiguraGeometrica());
+	pubGeometricPos.publish(getPosFiguraGeometrica());
 
 
 }
