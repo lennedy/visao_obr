@@ -7,7 +7,7 @@
 	<arg name="visualize" default="false"/>
 	<arg name="input_enable" default="true"/>
 
-  <include  if="$(arg input_enable)" file="$(find image_stream_opencv)/launch/image_stream.launch" >
+  <include if="$(arg input_enable)" file="$(find image_stream_opencv)/launch/image_stream.launch" >
 		<arg name="nome_grupo" value="camera"/>
 		<arg name="caminho_arquivo_fonte" value="$(arg caminho_arquivo_fonte)"/>
 	</include>
@@ -19,7 +19,7 @@
 			<param name="position_out_topic" type="string" value="$(arg position_out_topic)"/>
 		</node>
     <node if="$(arg visualize)" name="$(arg nome_grupo)_circle_view" pkg="image_view" type="image_view">
-    	<remap from="image" to="image_out_topic" />
+    	<remap from="image" to="$(arg image_out_topic)" />
     </node>
 	</group>
 
