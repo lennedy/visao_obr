@@ -42,7 +42,9 @@ void FindGeometric::imageCallBack(const sensor_msgs::ImageConstPtr& msg){
 	//Utiliza-se a classe CvImage para converter objetos/tipos "ROS" para objetos/tipos "openCv"
 	cv_bridge::CvImage cvImage; 
 
-	//		setCabecarioFigGeometrica(imageHeader);
+	camInfo.height	= msg->height;
+	camInfo.width		= msg->width;
+	header 					= msg->header;
 
 	try
 	{
@@ -54,7 +56,7 @@ void FindGeometric::imageCallBack(const sensor_msgs::ImageConstPtr& msg){
 
 		//Desenha cada circulo encontrado na imagem cvImage
 		desenharFiguraGeometrica(cvImage.image);
-
+		
 		//Publica-se a imagem depois de desenhar cada figura geometrica
 		pubImage.publish(cvImage.toImageMsg());
 	}
@@ -69,4 +71,10 @@ void FindGeometric::imageCallBack(const sensor_msgs::ImageConstPtr& msg){
 
 }
 
+void FindGeometric::mudarOrigem(geometry_msgs::Point32 &point)const{
 
+
+	point.x = point.x - camInfo.width/2.0;
+	point.y = camInfo.height/2.0 - point.y;
+
+}

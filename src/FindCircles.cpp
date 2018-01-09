@@ -36,7 +36,7 @@ PointCloud FindCircles::getPosFiguraGeometrica()const{
 	geometry_msgs::Point32 centroCirc; //O ponto que contera os valores x e y
 	ChannelFloat32 channel;		//O channel contera o valor do raio
 
-//	pos_circ.header = header;
+	pos_circ.header = header;
 
 	channel.name = "raio do circulo";  //adicionando uma explicacao sobre os dados no channel
 
@@ -47,6 +47,8 @@ PointCloud FindCircles::getPosFiguraGeometrica()const{
 		channel.values.clear();
 		centroCirc.x = circles[i][0];	//iniciando o centro do circulo com o valor de x
 		centroCirc.y = circles[i][1];	//iniciando o centro do circulo com o valor de y
+		mudarOrigem(centroCirc);
+
 		channel.values.push_back(circles[i][2]);	//iniciando um valor do "canal" com o raio do circulo
 	
 		//Adicionando ao final do vetor "points" o valor do centro do circulo

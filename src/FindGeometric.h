@@ -16,6 +16,8 @@ class FindGeometric{
 	std::string pubGeometricPosName; 	//Variavel onde ficara armazenado o nome do topico publisher de posicao
 	std::string subImageName;					//Variavel onde ficara armazenado o nome do topico subscriber de imagem
 
+	sensor_msgs::CameraInfo camInfo;
+
 	//criacao do "no" ROS
 	ros::NodeHandle nh;
 
@@ -24,10 +26,15 @@ class FindGeometric{
 	image_transport::ImageTransport it;
 
 protected:
+
+	std_msgs::Header header;
 	image_transport::Publisher pubImage;	//Declaração de publicacao em topico para enviar imagem com figura geometrica identificada
 	image_transport::Subscriber subImage;//Declaração de inscricao em topico para adquirir imagem nao tratada
 	ros::Publisher pubGeometricPos; //Declaracao de publicacao em topico para enviar vetor de poses das figuras geometricas encontradas
 	ros::Subscriber subImageInfo;
+
+	void mudarOrigem(geometry_msgs::Point32 &point)const;
+  inline void rosInfoPoint(const geometry_msgs::Point32 &p)const{	ROS_INFO("x:[%f]; y:[%f]", p.x, p.y);}
 
 public:
 
