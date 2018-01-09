@@ -29,16 +29,16 @@
 	    <arg name="height" value="0"/>
 		-->
 	  	<!-- visualize on an image_view window the stream generated -->
-	  	<arg name="visualize" value="true" />
+	  	<arg name="visualize" value="false" />
    </include>
 
 	<group ns= "$(arg nome_grupo)">	
-		<node pkg="visao_obr" name="find_rectangle" type="search_rectangle">
+		<node pkg="visao_obr" name="find_circle" type="search_circles">
 			<param name="image_in_topic" type="string" value="$(arg image_in_topic)"/>
 			<param name="image_out_topic" type="string" value="$(arg image_out_topic)"/>
 			<param name="position_out_topic" type="string" value="$(arg position_out_topic)"/>
 		</node>
-    <node if="$(arg visualize)" name="$(arg nome_grupo)_rectangle_view" pkg="image_view" type="image_view">
+    <node if="$(arg visualize)" name="$(arg nome_grupo)_circle_view" pkg="image_view" type="image_view">
     	<remap from="image" to="$(arg image_out_topic)" />
     </node>
 	</group>
