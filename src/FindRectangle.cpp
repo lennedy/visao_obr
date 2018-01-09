@@ -101,6 +101,7 @@ sensor_msgs::PointCloud FindRectangle::getPosFiguraGeometrica()const{
 	centroidePrincipal.x = rr.center.x;
 	centroidePrincipal.y = rr.center.y;
 	centroidePrincipal.z = 0;	
+	mudarOrigem(centroidePrincipal);				//muda a origem do lado superior esquerdo para o centro do video
 
 	ChannelFloat32 corners;
 	Point2f vertices[4];
@@ -108,6 +109,7 @@ sensor_msgs::PointCloud FindRectangle::getPosFiguraGeometrica()const{
 
 	corners.name = "4 vertices: (x,y)";
 	for (int i=0; i<4; i++){
+		//mudarOrigem(vertices[i]);
 		corners.values.push_back(vertices[i].x);
 		corners.values.push_back(vertices[i].y);
 	}

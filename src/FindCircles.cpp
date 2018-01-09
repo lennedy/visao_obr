@@ -47,7 +47,8 @@ PointCloud FindCircles::getPosFiguraGeometrica()const{
 		channel.values.clear();
 		centroCirc.x = circles[i][0];	//iniciando o centro do circulo com o valor de x
 		centroCirc.y = circles[i][1];	//iniciando o centro do circulo com o valor de y
-		mudarOrigem(centroCirc);
+
+		mudarOrigem(centroCirc);			//muda a origem do lado superior esquerdo para o centro do video
 
 		channel.values.push_back(circles[i][2]);	//iniciando um valor do "canal" com o raio do circulo
 	
