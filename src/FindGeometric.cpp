@@ -17,6 +17,11 @@ FindGeometric::FindGeometric():it(nh),_nh("~"){
   _nh.param("position_out_topic", position_out_topic, std::string("position_out_topic"));
 	setPubGeometricPosName(position_out_topic);
 
+  std::string centerPosition_out_topic;
+  _nh.param("centerPosition_out_topic", centerPosition_out_topic, std::string("centerPosition_out_topic"));
+	setPubGeometricCenterPosName(centerPosition_out_topic);
+
+
   std::string image_in_topic;
   _nh.param("image_in_topic", image_in_topic, std::string("image_in_topic"));
 	setSubImageName(image_in_topic);
@@ -32,8 +37,11 @@ void FindGeometric::init(){
 	//Iniciando o inscritor subImage
 	subImage = it.subscribe(subImageName.c_str(), 1, &FindGeometric::imageCallBack, this);
 
-	//Iniciando o publicador pubGeometricPose
+	//Iniciando o publicador pubGeometricPos
 	pubGeometricPos = nh.advertise<sensor_msgs::PointCloud>(pubGeometricPosName.c_str(), 1000);
+
+	//Iniciando o publicador pubGeometricCenterPos
+	pubGeometricCenterPos = nh.advertise<geometry_msgs::Point32>(pubGeometricCenterPosName.c_str(), 1000);
 
 }
 
@@ -65,9 +73,14 @@ void FindGeometric::imageCallBack(const sensor_msgs::ImageConstPtr& msg){
 		//imprime o erro se este vier a ocorrer
 		ROS_ERROR("Could not convert ros to openCV. '%s'.", e.what());
 	}
-	//publica o valor de posicao de cada figura geometrica
-	pubGeometricPos.publish(getPosFiguraGeometrica());
 
+	PointCloud geometricPos = getPosFiguraGeometrica();
+	//publica o valor de posicao de cada figura geometrica
+	pubGeometricPos.publish(geometricPos);
+
+	//p32	= geometriPos.points[0];
+	if(geometricPos.points.size()>0)
+		pubGeometricCenterPos.publish(geometricPos.points[0]);
 
 }
 
