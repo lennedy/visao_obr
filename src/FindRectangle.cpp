@@ -14,11 +14,37 @@ const geometry_msgs::Point32 FindRectangle::determinaCentroide(const RotatedRect
 
 	geometry_msgs::Point32 p;
 
-	
+}
+
+
+void FindRectangle::getRectangleCrentroid(const int biggestContourIdx, PointCloud& centroide)const{
+
+	if( contours.size() > 0 ){	
+		RotatedRect rr = minAreaRect(contours[biggestContourIdx]);
+		geometry_msgs::Point32 centroidePrincipal;
+		centroidePrincipal.x = rr.center.x;
+		centroidePrincipal.y = rr.center.y;
+		centroidePrincipal.z = 0;	
+		mudarOrigem(centroidePrincipal);				//muda a origem do lado superior esquerdo para o centro do video
+
+		ChannelFloat32 corners;
+		Point2f vertices[4];
+		rr.points(vertices);
+
+		corners.name = "4 vertices: (x,y)";
+		for (int i=0; i<4; i++){
+			//mudarOrigem(vertices[i]);
+			corners.values.push_back(vertices[i].x);
+			corners.values.push_back(vertices[i].y);
+		}
+
+		centroide.channels.push_back(corners);
+		centroide.points.push_back(centroidePrincipal);
+	}
 
 }
 
-inline void FindRectangle::desenharFiguraGeometrica(Mat &src)const{
+void FindRectangle::desenharFiguraGeometrica(Mat &src)const{
 
   std::vector<cv::Vec4i> hierarchy;
   float biggestContourArea = 0;
@@ -83,7 +109,7 @@ sensor_msgs::PointCloud FindRectangle::getPosFiguraGeometrica()const{
 
 	PointCloud centroidRectang;
 	float biggestContourArea;
-	int biggestContourIdx;
+	int biggestContourIdx=-1;
 
   for( int i = 0; i< contours.size(); i++ )
   {
@@ -96,29 +122,10 @@ sensor_msgs::PointCloud FindRectangle::getPosFiguraGeometrica()const{
 		}
 	}
 
-	RotatedRect rr = minAreaRect(contours[biggestContourIdx]);
-	geometry_msgs::Point32 centroidePrincipal;
-	centroidePrincipal.x = rr.center.x;
-	centroidePrincipal.y = rr.center.y;
-	centroidePrincipal.z = 0;	
-	mudarOrigem(centroidePrincipal);				//muda a origem do lado superior esquerdo para o centro do video
-
-	ChannelFloat32 corners;
-	Point2f vertices[4];
-	rr.points(vertices);
-
-	corners.name = "4 vertices: (x,y)";
-	for (int i=0; i<4; i++){
-		//mudarOrigem(vertices[i]);
-		corners.values.push_back(vertices[i].x);
-		corners.values.push_back(vertices[i].y);
+	if(biggestContourIdx >= 0){
+		getRectangleCrentroid(biggestContourIdx, centroidRectang);
 	}
-
-	centroidRectang.channels.push_back(corners);
-	centroidRectang.points.push_back(centroidePrincipal);
 
 	return centroidRectang;
 
 }
-
-

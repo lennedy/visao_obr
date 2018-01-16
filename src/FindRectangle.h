@@ -10,6 +10,8 @@ private:
 
 	const geometry_msgs::Point32 determinaCentroide(const cv::RotatedRect &rr)const;
 
+	void getRectangleCrentroid(const int biggestContourIdx, sensor_msgs::PointCloud& centroide)const;
+
 public:
 	FindRectangle();
 	void desenharFiguraGeometrica(cv::Mat &src)const;
