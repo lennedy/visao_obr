@@ -1,0 +1,21 @@
+<launch>
+	<arg name="visualize" default="false"/>
+
+	<include file="$(find visao_obr)/launch/circle_video_source.launch" >
+			<arg name="input_enable" value="true" />
+			<arg name="visualize" value="$(arg visualize)" />
+			<arg name="image_out_topic" value="image_circ_topic" />
+			<arg name="position_out_topic" value="position_circ_topic" />
+
+	</include>
+
+	<include file="$(find visao_obr)/launch/rectangle_video_source.launch" >
+			<arg name="input_enable" value="false" />
+			<arg name="visualize" value="$(arg visualize)" />
+			<arg name="image_out_topic" value="image_rect_topic" />
+			<arg name="position_out_topic" value="position_rect_topic" />
+
+	</include>
+
+	
+</launch>
