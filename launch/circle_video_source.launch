@@ -4,6 +4,7 @@
 	<arg name="image_out_topic" default="image_out_topic" />
 	<arg name="position_out_topic" default="position_out_topic" />	
 	<arg name="visualize" default="false"/>
+	<arg name="visualize_input" default="false"/>
 	<arg name="input_enable" default="true"/>
 
 	
@@ -11,7 +12,7 @@
    		<!-- node name and ros graph name -->
 	  	<arg name="camera_name" value="camera" />
 	  	<!-- means video device 0, /dev/video0 -->
-	  	<arg name="video_stream_provider" value="0" />
+	  	<arg name="video_stream_provider" value="1" />
 	  	<!-- throttling the querying of frames to -->
 	  	<arg name="fps" value="30" />
 	  	<!-- setting frame_id -->
@@ -29,7 +30,7 @@
 	    <arg name="height" value="0"/>
 		-->
 	  	<!-- visualize on an image_view window the stream generated -->
-	  	<arg name="visualize" value="false" />
+	  	<arg name="visualize" value="$(arg visualize_input)" />
    </include>
 
 	<group ns= "$(arg nome_grupo)">	
