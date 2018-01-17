@@ -3,6 +3,10 @@
 
 #include "FindGeometric.h"
 
+//Quando o minimo ou maximo do raio forem 0 significa que nao minimo ou maximo
+#define MINIMO_RAIO	0
+#define MAXIMO_RAIO 0
+
 class FindCircles: public FindGeometric{
 
 private:
@@ -11,6 +15,9 @@ private:
 	void acharCirculos(const cv::Mat &src);
 	void desenharCirculos(cv::Mat &src)const;
 	
+
+protected:
+
 
 public:
 
