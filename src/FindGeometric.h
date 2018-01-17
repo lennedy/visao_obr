@@ -9,8 +9,9 @@
 #include <geometry_msgs/Point.h>
 #include <std_msgs/Header.h>
 #include <string.h>
+#include "Calibration.h"
 
-class FindGeometric{
+class FindGeometric: public Calibration{
 
 	std::string pubImageName;					//Variavel onde ficara armazenado o nome do topico publisher de imagem
 	std::string pubGeometricPosName; 	//Variavel onde ficara armazenado o nome do topico publisher de posicao

@@ -26,6 +26,9 @@ FindGeometric::FindGeometric():it(nh),_nh("~"){
   _nh.param("image_in_topic", image_in_topic, std::string("image_in_topic"));
 	setSubImageName(image_in_topic);
 
+  std::string cali_in_topic;
+  _nh.param("cali_in_topic", cali_in_topic, std::string("cali_in_topic"));
+	setSubCalibrationName(cali_in_topic);
 
 }
 
@@ -42,6 +45,9 @@ void FindGeometric::init(){
 
 	//Iniciando o publicador pubGeometricCenterPos
 	pubGeometricCenterPos = nh.advertise<geometry_msgs::Point32>(pubGeometricCenterPosName.c_str(), 1000);
+
+	
+	Calibration::init(nh);
 
 }
 
