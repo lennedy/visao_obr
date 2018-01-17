@@ -11,14 +11,29 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+	message_generation
 )
 
 find_package(OpenCV)
+
+add_message_files(
+	FILES
+	CaliRect.msg
+	CaliCirc.msg
+	CaliGeometricCam.msg
+)
+
+generate_messages(
+	DEPENDENCIES
+	std_msgs
+)
+
 
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES visao_obr
 #  CATKIN_DEPENDS cv_bridge geometry_msgs image_stream_opencv image_transport roscpp rospy std_msgs video_stream_opencv
+	CATKIN_DEPENDS message_runtime
 #  DEPENDS system_lib
 )
 
@@ -26,6 +41,7 @@ add_library( visao_obr
 	src/FindRectangle.cpp
 	src/FindCircles.cpp
 	src/FindGeometric.cpp
+	src/Calibration.cpp
 )
 
 include_directories(
