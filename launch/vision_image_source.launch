@@ -4,6 +4,7 @@
 			<arg name="input_enable" value="true" />
 			<arg name="visualize" value="false" />
 			<arg name="image_out_topic" value="image_circ_topic" />
+			<arg name="cali_in_topic" default="cali_circle_in_topic" />
 			<arg name="position_out_topic" value="position_circ_topic" />
 
 	</include>
@@ -12,6 +13,7 @@
 			<arg name="input_enable" value="false" />
 			<arg name="visualize" value="false" />
 			<arg name="image_out_topic" value="image_rect_topic" />
+			<arg name="cali_in_topic" default="cali_rect_in_topic" />
 			<arg name="position_out_topic" value="position_rect_topic" />
 
 	</include>

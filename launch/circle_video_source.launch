@@ -1,6 +1,7 @@
 <launch>
 	<arg name="nome_grupo" default="PDI" />
 	<arg name="image_in_topic" default="/camera/image_raw" />
+	<arg name="cali_in_topic" default="cali_in_topic" />
 	<arg name="image_out_topic" default="image_out_topic" />
 	<arg name="position_out_topic" default="position_out_topic" />	
 	<arg name="visualize" default="false"/>
@@ -36,6 +37,7 @@
 	<group ns= "$(arg nome_grupo)">	
 		<node pkg="visao_obr" name="find_circle" type="search_circles">
 			<param name="image_in_topic" type="string" value="$(arg image_in_topic)"/>
+			<param name="cali_in_topic" type="string" value="$(arg cali_in_topic)"/>
 			<param name="image_out_topic" type="string" value="$(arg image_out_topic)"/>
 			<param name="position_out_topic" type="string" value="$(arg position_out_topic)"/>
 		</node>
