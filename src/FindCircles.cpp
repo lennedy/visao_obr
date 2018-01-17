@@ -4,10 +4,17 @@ using namespace cv;
 using namespace sensor_msgs;
 
 
+FindCircles::FindCircles():FindGeometric(){
+	caliCirc.limiarCanny = 150;
+	caliCirc.limiarHough = 45;
+}
+
+
 //utilizando a transformada de Hough encontra os circulos presentes na objeto "src"
 void FindCircles::acharCirculos(const Mat &src){
 	//Os valores numericos presentes na funcao "HoughCircles" devem ser substituidos por variaveis e constantes
-	HoughCircles( src, circles, CV_HOUGH_GRADIENT, 1, src.rows/8, 150, 45, 0, 0 );
+	//Os valores do limiar do canny era 150 e da transformada de Hough 45
+	HoughCircles( src, circles, CV_HOUGH_GRADIENT, 1, src.rows/8, caliCirc.limiarCanny, caliCirc.limiarHough, MINIMO_RAIO, MAXIMO_RAIO );
 }
 
 //Desenha um circulo onde foram encontrados circulos
@@ -26,9 +33,6 @@ void FindCircles::desenharCirculos(Mat &src)const{
 	}
 }
 
-
-FindCircles::FindCircles():FindGeometric(){
-}
 
 PointCloud FindCircles::getPosFiguraGeometrica()const{
 

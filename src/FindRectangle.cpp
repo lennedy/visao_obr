@@ -4,7 +4,7 @@ using namespace cv;
 using namespace sensor_msgs;
 
 FindRectangle::FindRectangle(){
-	
+	caliRect.limiarDefinicao = 80;	
 }
 
 const geometry_msgs::Point32 FindRectangle::determinaCentroide(const RotatedRect &rr)const{
@@ -98,7 +98,9 @@ void FindRectangle::desenharFiguraGeometrica(Mat &src)const{
 inline void FindRectangle::encontrarFiguraGeometrica(const Mat &src){
 
 	cv::Mat mask;
-  cv::threshold(src, mask, 80, 255, CV_THRESH_BINARY_INV); //| CV_THRESH_OTSU
+	//Abaixo da variavel limiarTransicao tudo sera considerado branco acima sera considerado preto
+	int LimiarTransicao = 80; //valor de funcionamento estava em 80
+  cv::threshold(src, mask, caliRect.limiarDefinicao, 255, CV_THRESH_BINARY_INV); //| CV_THRESH_OTSU
 
  // find contours (if always so easy to segment as your image, you could just add the black/rect pixels to a vector)
   cv::findContours(mask,contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
