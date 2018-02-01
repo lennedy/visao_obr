@@ -1,0 +1,13 @@
+<launch>
+	<include file="$(find visao_obr)/launch/vision_video_source.launch" >
+	<arg name="visualize" value="true"/>
+	</include>
+	<group ns= "calibracao">	
+		<node pkg="visao_obr" name="CalibrationServer" type="cali_server">
+		</node>  
+	<node name="calibracao_client" pkg="rqt_reconfigure" type="rqt_reconfigure">
+  </node>
+	</group>	
+
+</launch>
+

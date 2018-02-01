@@ -7,13 +7,14 @@
 	<arg name="visualize" default="false"/>
 	<arg name="visualize_input" default="false"/>
 	<arg name="input_enable" default="true"/>
+	<arg name="video_stream_provider" default="0"/>
 
 	
    <include if="$(arg input_enable)" file="$(find video_stream_opencv)/launch/camera.launch" >
    		<!-- node name and ros graph name -->
 	  	<arg name="camera_name" value="camera" />
 	  	<!-- means video device 0, /dev/video0 -->
-	  	<arg name="video_stream_provider" value="0" />
+	  	<arg name="video_stream_provider" value="$(arg video_stream_provider)" />
 	  	<!-- throttling the querying of frames to -->
 	  	<arg name="fps" value="30" />
 	  	<!-- setting frame_id -->
