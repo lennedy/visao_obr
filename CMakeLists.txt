@@ -12,9 +12,8 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
 	message_generation
+  dynamic_reconfigure
 )
-
-find_package(OpenCV)
 
 add_message_files(
 	FILES
@@ -26,6 +25,14 @@ add_message_files(
 generate_messages(
 	DEPENDENCIES
 	std_msgs
+)
+
+find_package(OpenCV)
+
+## Generate dynamic reconfigure parameters in the 'cfg' folder
+generate_dynamic_reconfigure_options(
+  cfg/CalibracaoData.cfg
+#   cfg/DynReconf2.cfg
 )
 
 
@@ -42,6 +49,7 @@ add_library( visao_obr
 	src/FindCircles.cpp
 	src/FindGeometric.cpp
 	src/Calibration.cpp
+	node/cali_server.cpp
 )
 
 include_directories(
@@ -52,7 +60,18 @@ include_directories(
 
 add_executable(search_circles src/find_circles.cpp)
 target_link_libraries(search_circles visao_obr ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+add_dependencies(search_circles ${PROJECT_NAME}_gencfg)
 
 add_executable(search_rectangle src/find_rectangle.cpp)
 target_link_libraries(search_rectangle visao_obr ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+add_dependencies(search_rectangle ${PROJECT_NAME}_gencfg)
+
+add_executable(cali src/CaliClient.cpp)
+target_link_libraries(cali visao_obr ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+add_dependencies(cali ${PROJECT_NAME}_gencfg)
+
+add_executable(cali_server node/cali_server.cpp)
+target_link_libraries(cali_server visao_obr ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+add_dependencies(cali_server ${PROJECT_NAME}_gencfg)
+
 
