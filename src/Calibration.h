@@ -10,9 +10,6 @@
 #include <visao_obr/CaliGeometricCam.h>
 #include <dynamic_reconfigure/Config.h>
 #include <dynamic_reconfigure/server.h>
-//#include <visao_obr/CalibracaoData.h>
-#include <visao_obr/TutorialsConfig.h>
-
 
 class Calibration{
 
