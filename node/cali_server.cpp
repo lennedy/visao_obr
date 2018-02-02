@@ -1,7 +1,6 @@
 #include <ros/ros.h>
 
 #include <dynamic_reconfigure/server.h>
-#include <visao_obr/TutorialsConfig.h>
 
 void callback(dynamic_tutorials::TutorialsConfig &config, uint32_t level) {
 //  ROS_INFO("Reconfigure Request: %d %d %d %s %d", 
