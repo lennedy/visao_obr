@@ -15,14 +15,10 @@ void Calibration::setCalibrationData(const visao_obr::CaliGeometricCam& msg){
 
 
 void Calibration::updateCalibrationData(const dynamic_reconfigure::Config &config){
- // ROS_INFO("Reconfigure Request: %d %d %d", 
- //           config.ints[0].value, config.ints[1].value, 
- //           config.ints[2].value);
 
-//	caliRect.limiarDefinicao 	= config.ints[0].value;
-//	caliCirc.limiarCanny			=	config.ints[1].value;
-//	caliCirc.limiarHough			=	config.ints[2].value;
-
+	caliRect.limiarDefinicao 	= config.ints[0].value;
+	caliCirc.limiarCanny			=	config.ints[1].value;
+	caliCirc.limiarHough			=	config.ints[2].value;
 }
 
 
