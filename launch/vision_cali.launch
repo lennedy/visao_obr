@@ -1,0 +1,22 @@
+<launch>
+	<arg name="nome_grupo" default="calibracao" />
+
+	<group ns= "$(arg nome_grupo)">	
+		<node pkg="visao_obr" name="CalibrationServer" type="cali_server">
+		</node>  
+	<node name="calibracao_client" pkg="rqt_reconfigure" type="rqt_reconfigure">
+  </node>
+
+  <node name="$(arg nome_grupo)_circle_view" pkg="image_view" type="image_view">
+		<param name="image_transport" value="compressed" />
+  	<remap from="image" to="/PDI/image_circ_topic" />
+  </node>
+  <node name="$(arg nome_grupo)_rectangle_view" pkg="image_view" type="image_view">
+		<param name="image_transport" value="compressed" />
+  	<remap from="image" to="/PDI/image_rect_topic" />
+  </node>
+
+	</group>	
+
+</launch>
+
