@@ -1,0 +1,25 @@
+!!python/object/new:dynamic_reconfigure.encoding.Config
+dictitems:
+  bool_param: true
+  cali_circ_canny: 50
+  cali_circ_hough: 90
+  cali_rect: 73
+  groups: !!python/object/new:dynamic_reconfigure.encoding.Config
+    dictitems:
+      bool_param: true
+      cali_circ_canny: 50
+      cali_circ_hough: 90
+      cali_rect: 73
+      groups: !!python/object/new:dynamic_reconfigure.encoding.Config
+        state: []
+      id: 0
+      name: Default
+      parameters: !!python/object/new:dynamic_reconfigure.encoding.Config
+        state: []
+      parent: 0
+      size: 3
+      state: true
+      type: ''
+    state: []
+  size: 3
+state: []
